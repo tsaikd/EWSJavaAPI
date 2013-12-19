@@ -1,0 +1,28 @@
+/** define the following properties in gradle.properties
+tomcatHost
+tomcatPort
+tomcatUser
+tomcatPass
+ **/
+/** add to build.gradle
+apply from: 'gradle/tomcat.gradle'
+buildscript {
+	apply from: 'gradle/tomcat-buildscript.gradle'
+}
+ */
+
+apply plugin: 'cargo'
+
+cargo {
+	containerId = 'tomcat7x'
+	remote {
+		hostname = tomcatHost
+		port = Integer.parseInt(tomcatPort)
+		username = tomcatUser
+		password = tomcatPass
+	}
+}
+
+dependencies {
+	cargo 'org.codehaus.cargo:cargo-ant:+'
+}
